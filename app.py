@@ -1,22 +1,18 @@
-import urllib2
+#import urllib2
 #import requests as req #windows py3
-#import urllib.request #windows
+import urllib.request #windows
+import urllib.parse
+import re
 from bs4 import BeautifulSoup
 
 #1 getting web page:
 web_page = 'https://finance.yahoo.com/quote/FB?p=FB'
-
-#query the website and return the html to the variable page:
-page = urllib2.urlopen(web_page)
-#page = req.get(web_page)
-#urllib.request.Request(web_page) #windows
-#print(page)
-
-soup = BeautifulSoup(page, 'html.parser')
-#soup = BeautifulSoup(page.text, 'html.parser')
+page = urllib.request.urlopen(web_page).read()
+soup=BeautifulSoup(page,'html.parser')
+#print(soup.h1)
 
 name_box = soup.find('h1', attrs={'class': 'D(ib)'})
-# print(name_box)
+print(name_box)
 name = name_box.text
 print(name)
 
